@@ -4,6 +4,8 @@ export enum TaskActionsTypes {
     START_TASK = 'START_TASK',
     INTERRUPT_TASK = 'INTERRUPT_TASK',
     RESET_TASK = 'RESET_TASK',
+    COUNT_DOWN = 'COUNT_DOWN',
+    COMPLETE_TASK = 'COMPLETE_TASK',
 }
 
 export type TaskActionModel =
@@ -14,4 +16,10 @@ export type TaskActionModel =
         type: TaskActionsTypes.INTERRUPT_TASK;
     } | {
         type: TaskActionsTypes.RESET_TASK;
+    } | {
+        type: TaskActionsTypes.COUNT_DOWN;
+        payload: { secondsRemaining: number };
+    } | {
+        type: TaskActionsTypes.COMPLETE_TASK;
+
     };

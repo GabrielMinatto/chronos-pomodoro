@@ -9,6 +9,7 @@ import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import { TaskActionsTypes } from "../../contexts/TaskContext/taskActions";
 import { Tips } from "../Tips";
+import { TimerWorkerManager } from "../../worker/TimeWokerManager";
 
 export function MainForm() {
     const { state, dispatch } = useTaskContext();
@@ -34,14 +35,22 @@ export function MainForm() {
         const newTask: TaskModel = {
             id: Date.now().toString(),
             name: taskName,
-            starDate: Date.now(),
+            startDate: Date.now(),
             completeDate: null,
             interruptDate: null,
             duration: state.config[nextCycleType],
             type: nextCycleType
         };
 
-        dispatch({ type: TaskActionsTypes.START_TASK, payload: newTask })
+        dispatch({ type: TaskActionsTypes.START_TASK, payload: newTask });
+
+        // const worker = TimerWorkerManager.getInstance();
+
+        // worker.postMessage('AAAAAAAAA')
+
+        // worker.onmessage((event) => {
+        //     console.log('PRINCIPAL', event.data)
+        // })
 
     }
 
